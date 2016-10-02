@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 # Create your models here.
+# To-do add user and review
+# Add book category
+# Add book language
 
 
 @python_2_unicode_compatible
@@ -29,11 +32,14 @@ class Author(models.Model):
 @python_2_unicode_compatible
 class Book(models.Model):
     title = models.CharField(max_length=100)
+    isbn = models.CharField(max_length=10)
     authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher)
     publication_date = models.DateField()
-    publication_version = models.CharField(max_length=10)
+    edition = models.CharField(max_length=10)
+    price = models.CharField(max_length=20)
+    discounted_price = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
-        return u'%s Ver: %s' % (self.title, self.publication_version)
+        return u'%s; %s edition (%s)' % (self.title, self.edition, self.publication_date)
 

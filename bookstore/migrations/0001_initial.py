@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Author',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('first_name', models.CharField(max_length=30)),
                 ('last_name', models.CharField(max_length=40)),
                 ('email', models.EmailField(blank=True, max_length=254, null=True)),
@@ -22,17 +22,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Book',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=100)),
+                ('isbn', models.CharField(max_length=10)),
                 ('publication_date', models.DateField()),
-                ('publication_version', models.CharField(max_length=10)),
+                ('edition', models.CharField(max_length=10)),
+                ('price', models.CharField(max_length=20)),
+                ('discounted_price', models.CharField(blank=True, max_length=20)),
                 ('authors', models.ManyToManyField(to='bookstore.Author')),
             ],
         ),
         migrations.CreateModel(
             name='Publisher',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=30)),
                 ('address', models.CharField(max_length=50)),
                 ('city', models.CharField(max_length=30)),
